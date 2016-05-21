@@ -38,12 +38,10 @@ typedef struct {
   u8 _;
 } ast;
 
-ast ast_new();
-void ast_collect_types(ast* ast, str_iter iter); // first pass
-void ast_collect_function_types(ast* ast, str_iter iter); // second pass
-void ast_collect_functions(ast* ast, str_iter iter); // second pass
-void ast_build(ast* ast, str file);
+ast ast_new(void);
+void ast_add_function(ast* self, function func);
 
 function function_new(str name, type return_ty);
+void function_add_stmt(function* self, statement stmt);
 
 #endif

@@ -16,15 +16,13 @@ void compile(str_iter iter) {
 
   while (1) {
     switch (advance.kind) {
-      case Tok_keyword_fn:
+      case Tok_keyword_fn: {
         parse_function(&ast, &iter);
-        break;
-      case Tok_eof:
-        return;
-      default:
-        printf("Error: expected item, found ");
-        token_print(&cur_tok);
-        exit(1);
+      } break;
+      case Tok_eof: {
+      } return;
+      default: {
+      } token_error(str_from_lit("item"), &cur_tok);
     }
   }
 #undef advance

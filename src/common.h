@@ -7,7 +7,7 @@
 
 #if _MSC_VER >= 1310
   // MS Visual Studio 2003/.NET Framework 1.1 or newer
-#define NORETURN __declspec( noreturn);
+#define NORETURN __declspec(noreturn)
 #elif __GNUC__ > 2 || (__GNUC__ == 2 && (__GNUC_MINOR__ >= 5))
   // GCC 2.5 or newer
 #define NORETURN __attribute__((noreturn))

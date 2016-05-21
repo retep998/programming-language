@@ -18,9 +18,13 @@ expression parse_expression(str_iter* iter) {
     case Tok_integer:
       expr.kind = Expr_int_literal;
       expr.data.int_literal.value = cur_tok.data.integer.value;
+      eat(Tok_semicolon);
+      break;
     default:
       token_error(str_from_lit("expression"), &cur_tok);
   }
+
+  return expr;
 }
 
 statement parse_stmt(str_iter* iter) {
@@ -28,16 +32,15 @@ statement parse_stmt(str_iter* iter) {
   token cur_tok;
 
   switch (advance.kind) {
-    case Tok_keyword_return:
+    case Tok_keyword_return: {
       stmt.kind = Stmt_return;
       stmt.data.return_ = parse_expression(iter);
-      break;
-    case Tok_close_brace:
+    } break;
+    case Tok_close_brace: {
       stmt.kind = Stmt_none;
-    default:
-      printf("Error: expected statement, found ");
-      token_print(&cur_tok);
-      exit(1);
+    } break;
+    default: {
+    } token_error(str_from_lit("statement"), &cur_tok);
   }
   return stmt;
 }
@@ -59,9 +62,16 @@ void parse_function(ast* ast, str_iter* iter) {
   func = function_new(name, return_ty);
 
   while (1) {
+    statement cur_stmt;
+    switch ((cur_stmt = parse_stmt(iter)).kind) {
+      case Stmt_return: {
+        function_add_stmt(&func, cur_stmt);
+      } break;
+      case Stmt_none: {
+        ast_add_function(ast, func);
+      } return;
+    }
   }
-
-  (void)ast;
 }
 #undef advance
 #undef eat

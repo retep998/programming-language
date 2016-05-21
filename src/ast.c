@@ -1,27 +1,25 @@
 #include "ast.h"
 
-ast ast_new() {
+ast ast_new(void) {
   ast ret;
   ret._ = 0;
   return ret;
 }
 
-void ast_collect_types(ast* ast, str_iter iter) {
-  (void)ast;
-  (void)iter;
+void ast_add_function(ast* self, function func) {
+  (void)self;
+  (void)func;
 }
 
-void ast_collect_function_types(ast* ast, str_iter iter) {
-  (void)ast;
-  (void)iter;
+function function_new(str name, type return_ty) {
+  function ret;
+  ret.name = name;
+  ret.return_ty = return_ty;
+
+  return ret;
 }
 
-void ast_collect_functions(ast* ast, str_iter iter) {
-  (void)ast;
-  (void)iter;
-}
-
-void ast_build(ast* ast, str file) {
-  (void)ast;
-  (void)file;
+void function_add_stmt(function* self, statement stmt) {
+  (void)self;
+  (void)stmt;
 }

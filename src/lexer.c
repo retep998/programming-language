@@ -5,56 +5,56 @@
 
 void token_kind_print(tokenKind kind) {
   switch (kind) {
-    case Tok_keyword_fn:
+    case Tok_keyword_fn: {
       printf("keyword `fn`");
-      break;
-    case Tok_keyword_return:
+    } break;
+    case Tok_keyword_return: {
       printf("keyword `return`");
-      break;
-    case Tok_identifier:
+    } break;
+    case Tok_identifier: {
       printf("identifier");
-      break;
-    case Tok_integer:
+    } break;
+    case Tok_integer: {
       printf("integer");
-      break;
-    case Tok_open_paren:
+    } break;
+    case Tok_open_paren: {
       printf("`(`");
-      break;
-    case Tok_close_paren:
+    } break;
+    case Tok_close_paren: {
       printf("`)`");
-      break;
-    case Tok_open_brace:
+    } break;
+    case Tok_open_brace: {
       printf("`{`");
-      break;
-    case Tok_close_brace:
+    } break;
+    case Tok_close_brace: {
       printf("`}`");
-      break;
-    case Tok_semicolon:
+    } break;
+    case Tok_semicolon: {
       printf("`;`");
-      break;
-    case Tok_skinny_arrow:
+    } break;
+    case Tok_skinny_arrow: {
       printf("`->`");
-      break;
-    case Tok_colon:
+    } break;
+    case Tok_colon: {
       printf("`:`");
-      break;
-    case Tok_eof:
+    } break;
+    case Tok_eof: {
       printf("`EOF`");
-      break;
+    } break;
   }
 }
 
 void token_print(token const* tok) {
   switch (tok->kind) {
-    case Tok_identifier:
+    case Tok_identifier: {
       printf("identifier `"); str_print(tok->data.identifier); printf("`");
-      break;
-    case Tok_integer:
+    } break;
+    case Tok_integer: {
       printf("integer `%llu`", tok->data.integer.value);
-      break;
-    default:
+    } break;
+    default: {
       token_kind_print(tok->kind);
-      break;
+    } break;
   }
 }
 
@@ -169,8 +169,7 @@ token eat_token(str_iter* iter, tokenKind kind) {
   }
 }
 
-NORETURN
-void token_error(str expected, token const* found) {
+NORETURN void token_error(str expected, token const* found) {
   printf("Error: expected ");
   str_print(expected);
   printf(", found ");
