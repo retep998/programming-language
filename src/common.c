@@ -102,7 +102,7 @@ int str_parse_u64(str from, u64* to) {
   usize i;
   *to = 0;
   for (i = 0; i < from.length; ++i) {
-    if (!isdigit(from.pointer[i])) {
+    if (!isdigit((unsigned char)from.pointer[i])) {
       return -1;
     }
     *to = *to * 10 + (u64)(from.pointer[i] - '0');
