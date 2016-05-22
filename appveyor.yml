@@ -1,0 +1,6 @@
+install:
+  - call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\amd64\vcvars64.bat"
+build_script:
+  - cl /Wall /analyze /wd4820 /wd4710 /wd6308 src\driver.c /WX /Fepink
+test_script:
+  - pink.exe
