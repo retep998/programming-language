@@ -6,10 +6,10 @@
 #include <stddef.h>
 
 #if _MSC_VER >= 1310
-  // MS Visual Studio 2003/.NET Framework 1.1 or newer
+  /* MS Visual Studio 2003/.NET Framework 1.1 or newer */
 #define NORETURN __declspec(noreturn)
 #elif __GNUC__ > 2 || (__GNUC__ == 2 && (__GNUC_MINOR__ >= 5))
-  // GCC 2.5 or newer
+  /* GCC 2.5 or newer */
 #define NORETURN __attribute__((noreturn))
 #elif __STDC_VERSION__ >= 201112L
 #define NORETURN _Noreturn
@@ -32,7 +32,7 @@ typedef ptrdiff_t ssize;
 typedef struct {
   usize length;
   usize capacity;
-  // NOT nul terminated
+  /* NOT nul terminated */
   char* pointer;
 } string;
 typedef struct {
@@ -54,14 +54,14 @@ void string_push(string* self, char c);
 void string_free(string self);
 void string_print(string const* self);
 
-// must be freed afterwards!
+/* must be freed afterwards! */
 char* str_cstr(str self);
 void str_print(str self);
 
-// 1 if equal, 0 if not
+/* 1 if equal, 0 if not */
 int str_eq(str lhs, str rhs);
 
-// returns 0 if successfully parsed
+/* returns 0 if successfully parsed */
 int str_parse_u64(str from, u64* to);
 
 str str_from_raw_parts(char const* s, usize length);
@@ -69,9 +69,9 @@ str str_from_raw_parts(char const* s, usize length);
 #define str_from_lit(s) str_from_raw_parts(s "", sizeof(s) - 1)
 
 str_iter str_iter_new(str s);
-// returns the next char, or -1 if EOF
+/* returns the next char, or -1 if EOF */
 int str_iter_advance(str_iter* self);
-// returns the next char, or -1 if EOF
+/* returns the next char, or -1 if EOF */
 int str_iter_peek(str_iter const* self);
 
 #endif

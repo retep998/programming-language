@@ -4,26 +4,26 @@
 #include "common.h"
 
 typedef enum token_kind {
-  // words
+  /* words */
   Tok_keyword_fn,
   Tok_keyword_return,
   Tok_identifier,
 
-  // numbers
+  /* numbers */
   Tok_integer,
 
-  // delimiters
+  /* delimiters */
   Tok_open_paren,
   Tok_close_paren,
   Tok_open_brace,
   Tok_close_brace,
   Tok_semicolon,
 
-  // types
+  /* types */
   Tok_skinny_arrow,
   Tok_colon,
 
-  // eof
+  /* eof */
   Tok_eof
 } tokenKind;
 

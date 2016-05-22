@@ -84,7 +84,7 @@ str str_from_raw_parts(char const* s, usize length) {
   return ret;
 }
 
-// 1 if equal, 0 if not
+/* 1 if equal, 0 if not */
 int str_eq(str lhs, str rhs) {
   if (lhs.length != rhs.length) {
     return 0;
@@ -97,7 +97,7 @@ int str_eq(str lhs, str rhs) {
   }
 }
 
-// returns 0 if successfully parsed
+/* returns 0 if successfully parsed */
 int str_parse_u64(str from, u64* to) {
   usize i;
   *to = 0;
@@ -105,7 +105,7 @@ int str_parse_u64(str from, u64* to) {
     if (!isdigit(from.pointer[i])) {
       return -1;
     }
-    *to = *to * 10 + from.pointer[i] - '0';
+    *to = *to * 10 + (u64)(from.pointer[i] - '0');
   }
   return 0;
 }

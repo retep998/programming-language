@@ -6,10 +6,10 @@
 #include "types.c"
 #include "parse.c"
 
-// TODO(ubsan): real error handling
+/* TODO(ubsan): real error handling */
 
 
-void compile(str_iter iter) {
+static void compile(str_iter iter) {
 #define advance (cur_tok = get_token(&iter))
   ast ast;
   token cur_tok;

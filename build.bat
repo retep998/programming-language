@@ -1,3 +1,3 @@
 @echo off
 
-cl /Wall /analyze /wd4820 /wd4242 /wd4710 /wd6308 /wd6330 src\driver.c /F pink
+cl /Wall /analyze /wd4820 /wd4710 /wd6308 src\driver.c /Fepink

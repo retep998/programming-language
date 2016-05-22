@@ -62,14 +62,14 @@ token get_token(str_iter* iter) {
 #define advance str_iter_advance(iter)
 #define peek str_iter_peek(iter)
   token ret;
-  char first;
+  int first;
 
   while(isspace(first = peek)) {
     advance;
   }
 
-  // === words ===
-  if (isalpha(first)) { // Identifier or Keyword
+  /* === words === */
+  if (isalpha(first)) { /* Identifier or Keyword */
     str ident;
     ident.pointer = iter->data.pointer + iter->idx;
     ident.length = 1;
@@ -86,12 +86,13 @@ token get_token(str_iter* iter) {
       ret.kind = Tok_identifier;
       ret.data.identifier = ident;
     }
-    return ret; // returns early so as to not deal with the automatic advance
-                // at the bottom
+    return ret; /* returns early so as to not deal with the automatic advance
+                   at the bottom
+                 */
   }
 
-  // === numbers ===
-  else if (isdigit(first)) { // number
+  /* === numbers === */
+  else if (isdigit(first)) { /* number */
     str ident;
     u64 number;
     ident.pointer = iter->data.pointer + iter->idx;
@@ -114,7 +115,7 @@ token get_token(str_iter* iter) {
     return ret;
   }
 
-  // === operators ===
+  /* === operators === */
   else if (first == '-') {
     advance;
     if (peek == '>') {
@@ -125,7 +126,7 @@ token get_token(str_iter* iter) {
     }
   }
 
-  // === delimiters ===
+  /* === delimiters === */
   else if (first == '(') {
     ret.kind = Tok_open_paren;
   } else if (first == ')') {
@@ -138,12 +139,12 @@ token get_token(str_iter* iter) {
     ret.kind = Tok_semicolon;
   }
 
-  // === types ===
+  /* === types === */
   else if (first == ':') {
     ret.kind = Tok_colon;
   }
 
-  // === misc ===
+  /* === misc === */
   else if (first == -1) {
     ret.kind = Tok_eof;
   } else {

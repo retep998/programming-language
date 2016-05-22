@@ -5,12 +5,13 @@
 
 #include <stdio.h>
 
-// NOTE(ubsan): SEE THESE MACROS! the code below will be very confusing if you
-// don't
+/* NOTE(ubsan): SEE THESE MACROS! the code below will be very confusing if you
+   don't
+ */
 #define advance (cur_tok = get_token(iter))
 #define eat(kind) (cur_tok = eat_token(iter, (kind)))
 
-expression parse_expression(str_iter* iter) {
+static expression parse_expression(str_iter* iter) {
   expression expr;
   token cur_tok;
 
@@ -27,7 +28,7 @@ expression parse_expression(str_iter* iter) {
   return expr;
 }
 
-statement parse_stmt(str_iter* iter) {
+static statement parse_stmt(str_iter* iter) {
   statement stmt;
   token cur_tok;
 
@@ -55,7 +56,7 @@ void parse_function(ast* ast, str_iter* iter) {
   name = cur_tok.data.identifier;
   eat(Tok_open_paren); eat(Tok_close_paren);
   eat(Tok_skinny_arrow);
-  eat(Tok_identifier); // return type
+  eat(Tok_identifier); /* return type */
   return_ty = resolve(cur_tok.data.identifier);
   eat(Tok_open_brace);
 
