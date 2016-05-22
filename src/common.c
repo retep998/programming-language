@@ -4,11 +4,17 @@
 #include <stdio.h>
 #include <ctype.h>
 
+#define OOM() do { \
+  puts("out of memory"); \
+  exit(255); \
+} while(0)
+
 string string_from_cstr(char const* str) {
   string ret;
 
   ret.length = ret.capacity = strlen(str);
   ret.pointer = malloc(ret.capacity);
+  if (ret.pointer == NULL) { OOM(); }
   memcpy(ret.pointer, str, ret.length);
   return ret;
 }
@@ -18,11 +24,12 @@ string string_from_str(str str) {
 
   ret.length = ret.capacity = str.length;
   ret.pointer = malloc(ret.capacity);
+  if (ret.pointer == NULL) { OOM(); }
   memcpy(ret.pointer, str.pointer, ret.length);
   return ret;
 }
 
-string string_new() {
+string string_new(void) {
   string ret = {0, 0, NULL};
   return ret;
 }
@@ -37,9 +44,7 @@ str string_str(string const* string) {
 void string_push(string* self, char c) {
   if (self->length + 1 == self->capacity) {
     self->pointer = realloc(self->pointer, self->capacity * 2);
-    if (self->pointer == NULL) {
-      exit(255);
-    }
+    if (self->pointer == NULL) { OOM(); }
     self->capacity *= 2;
   }
   self->pointer[self->length] = c;
@@ -57,6 +62,7 @@ void string_print(string const* self) {
 
 char* str_cstr(str string) {
   char* ret = malloc(string.length + 1);
+  if (ret == NULL) { OOM(); }
   memcpy(ret, string.pointer, string.length);
   ret[string.length] = '\0';
   return ret;

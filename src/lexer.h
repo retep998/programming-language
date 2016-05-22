@@ -3,7 +3,7 @@
 
 #include "common.h"
 
-typedef enum {
+typedef enum token_kind {
   // words
   Tok_keyword_fn,
   Tok_keyword_return,
@@ -27,14 +27,15 @@ typedef enum {
   Tok_eof
 } tokenKind;
 
-typedef struct {
-  tokenKind kind;
+typedef struct token {
   union {
     str identifier;
     struct {
       u64 value;
     } integer;
   } data;
+
+  tokenKind kind;
 } token;
 
 void token_kind_print(tokenKind kind);

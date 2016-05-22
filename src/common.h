@@ -47,6 +47,8 @@ typedef struct {
 
 string string_from_cstr(char const* str);
 string string_from_str(str str);
+string string_new(void);
+
 str string_str(string const* self);
 void string_push(string* self, char c);
 void string_free(string self);

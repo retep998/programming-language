@@ -4,37 +4,39 @@
 #include "common.h"
 #include "types.h"
 
-typedef enum {
+typedef enum expression_kind {
   Expr_int_literal
 } expression_kind;
 
-typedef struct {
-  expression_kind kind;
+typedef struct expression {
   union {
     struct {
       u64 value;
     } int_literal;
   } data;
+
+  expression_kind kind;
 } expression;
 
-typedef enum {
+typedef enum statement_kind {
   Stmt_return,
   Stmt_none
 } statement_kind;
 
-typedef struct {
-  statement_kind kind;
+typedef struct statement {
   union {
     expression return_;
   } data;
+
+  statement_kind kind;
 } statement;
 
-typedef struct {
+typedef struct function {
   str name;
   type return_ty;
 } function;
 
-typedef struct {
+typedef struct ast {
   u8 _;
 } ast;
 
